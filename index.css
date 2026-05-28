@@ -365,17 +365,20 @@ section {
   display: inline-block;
   background: var(--accent-green);
   color: var(--text-main);
-  padding: 5px 15px;
+  padding: 4px 12px;
   border-radius: 20px;
   font-weight: 700;
-  font-size: 0.9rem;
-  margin-bottom: 15px;
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  margin-bottom: 12px;
 }
 
 .sport-card h3 {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
+  font-size: clamp(1.2rem, 3.2vw, 1.5rem);
+  margin-bottom: 12px;
   color: var(--accent-blue);
+  line-height: 1.35;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .sport-info {
@@ -482,7 +485,8 @@ section {
 .pop-text-multi span:nth-child(6n+6) { color: var(--accent-blue); }
 
 .pop-text-shadow {
-  text-shadow: 3px 3px 0px #FFF, 6px 6px 0px rgba(0,0,0,0.1);
+  -webkit-text-stroke: 2px #333;
+  text-shadow: 3px 3px 0px #333, 5px 5px 0px rgba(0,0,0,0.15);
 }
 
 .sticker-card {
@@ -618,4 +622,22 @@ section {
   .bubble-item { width: 140px; height: 140px; }
   .bubble-icon { font-size: 2rem; }
   .bubble-title { font-size: 0.9rem; }
+  .sport-card h3 {
+    font-size: 1.15rem !important;
+    margin-bottom: 8px !important;
+  }
+  .sport-card .sport-content {
+    padding: 20px !important;
+  }
+  .sport-info {
+    margin-bottom: 12px !important;
+  }
+  .sport-info li {
+    font-size: 0.78rem !important;
+    margin-bottom: 6px !important;
+    padding-left: 18px !important;
+  }
+  .sport-card p {
+    font-size: 0.8rem !important;
+  }
 }
