@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>謎解き脱出ゲーム | SPORTS & MARCHE 2026</title>
+  <meta name="description" content="ますだスポまる運動会2026特別企画！体育館に隠された謎を解き明かし、消えた黄金のスポまるメダルを取り戻せ！">
+  <link rel="stylesheet" href="index.css">
+  <style>
+    /* Mysterious Neon Pop Custom Theme for Escape Game Page */
+    :root {
+      --mystery-bg: #0C0826;
+      --mystery-card-bg: #16113A;
+      --neon-pink: #FF2E93;
+      --neon-cyan: #00F0FF;
+      --neon-yellow: #FFDB00;
+      --neon-purple: #B026FF;
+      --border-neon-pink: 4px solid var(--neon-pink);
+      --border-neon-cyan: 4px solid var(--neon-cyan);
+      --shadow-neon-pink: 6px 6px 0px var(--neon-pink);
+      --shadow-neon-cyan: 6px 6px 0px var(--neon-cyan);
+    }
+
+    body.mystery-theme {
+      background-color: var(--mystery-bg);
+      color: #F0EDFF;
+    }
+
+    .mystery-header {
+      background: rgba(22, 17, 58, 0.9) !important;
+      border: 3px solid var(--neon-cyan) !important;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2) !important;
+    }
+
+    .mystery-header a, .mystery-header nav a {
+      color: #FFF !important;
+    }
+
+    .mystery-header nav a:hover {
+      background: var(--neon-pink) !important;
+      color: #FFF !important;
+    }
+
+    .pattern-mystery {
+      background-color: var(--mystery-bg);
+      background-image: 
+        radial-gradient(rgba(255, 46, 147, 0.15) 15%, transparent 15%),
+        radial-gradient(rgba(0, 240, 255, 0.15) 15%, transparent 15%);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Floating mystery icons */
+    .mystery-float-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-q {
+      position: absolute;
+      font-weight: 900;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      animation: float-spin 6s ease-in-out infinite;
+      opacity: 0.12;
+    }
+
+    @keyframes float-spin {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(15deg); }
+    }
+
+    /* Story Box */
+    .story-card {
+      background: var(--mystery-card-bg);
+      border: var(--border-neon-pink);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-neon-pink);
+      padding: 40px;
+      margin-bottom: 50px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .story-title {
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      text-align: center;
+      margin-bottom: 25px;
+      color: var(--neon-yellow);
+    }
+
+    .story-text {
+      font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+      line-height: 1.8;
+      text-align: justify;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    /* Course Cards */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .course-card {
+      background: var(--mystery-card-bg);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .course-card.pink-border {
+      border: var(--border-neon-pink);
+      box-shadow: var(--shadow-neon-pink);
+    }
+
+    .course-card.cyan-border {
+      border: var(--border-neon-cyan);
+      box-shadow: var(--shadow-neon-cyan);
+    }
+
+    .course-card:hover {
+      transform: translate(-4px, -4px);
+    }
+
+    .course-card.pink-border:hover {
+      box-shadow: 12px 12px 0px var(--neon-pink);
+    }
+
+    .course-card.cyan-border:hover {
+      box-shadow: 12px 12px 0px var(--neon-cyan);
+    }
+
+    .course-header-box {
+      padding: 25px;
+      text-align: center;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 900;
+      color: #FFF;
+      font-size: 1.3rem;
+    }
+
+    .course-body {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .course-difficulty {
+      font-weight: 900;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      color: var(--neon-yellow);
+    }
+
+    .course-desc {
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      line-height: 1.6;
+      color: #D3CEFD;
+      flex-grow: 1;
+      margin-bottom: 20px;
+    }
+
+    /* Event Info Box */
+    .mystery-info-grid {
+      background: rgba(22, 17, 58, 0.85);
+      border: 3px solid var(--neon-yellow);
+      border-radius: var(--radius-lg);
+      box-shadow: 6px 6px 0 var(--neon-yellow);
+      padding: 35px;
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .info-item h4 {
+      color: var(--neon-yellow);
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .info-item p {
+      font-size: 0.95rem;
+      color: #FFF;
+      line-height: 1.5;
+    }
+
+    /* Glowing CTA Button */
+    .mystery-cta-btn {
+      display: inline-block;
+      width: 100%;
+      max-width: 400px;
+      margin: 50px auto 0;
+      padding: 15px 30px;
+      background: var(--neon-pink);
+      color: #FFF;
+      border: 3px solid #333;
+      border-radius: 50px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 900;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 1.2rem;
+      box-shadow: 6px 6px 0px #333;
+      transition: 0.2s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mystery-cta-btn:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 9px 9px 0px #333;
+      background: #FF0073;
+    }
+
+    /* Outline overrides for legibility */
+    .mystery-outline {
+      -webkit-text-stroke: 2px #120E2E;
+      text-shadow: 2px 2px 0px var(--neon-cyan), 4px 4px 0px rgba(0,0,0,0.3);
+    }
+
+    .mobile-menu {
+      background: var(--mystery-bg) !important;
+      border-left: 4px solid var(--neon-cyan) !important;
+    }
+
+    .mobile-menu a {
+      color: var(--neon-cyan) !important;
+    }
+
+    /* Mobile Responsive Tweaks */
+    @media (max-width: 768px) {
+      .story-card {
+        padding: 25px 20px;
+      }
+      .course-body {
+        padding: 20px;
+      }
+      .mystery-info-grid {
+        padding: 25px 20px;
+        gap: 20px;
+      }
+      .mystery-cta-btn {
+        font-size: 1rem;
+        padding: 12px 24px;
+        margin-top: 40px;
+      }
+      .section-title {
+        font-size: 6vw !important;
+      }
+    }
+  </style>
+</head>
+<body class="mystery-theme">
+
+  <!-- Vertical Sidebar Text -->
+  <div class="sidebar-text left">
+    <div class="vertical-text" style="color: rgba(0, 240, 255, 0.08);">ESCAPE GAME 2026</div>
+  </div>
+  <div class="sidebar-text right">
+    <div class="vertical-text" style="color: rgba(255, 46, 147, 0.08);">MASUDA SPOMARU FESTIVAL</div>
+  </div>
+
+  <header class="mystery-header">
+    <a href="index.html" class="logo pop-text-multi">
+      <span style="color: var(--neon-pink)">ま</span>
+      <span style="color: var(--neon-cyan)">す</span>
+      <span style="color: var(--neon-yellow)">だ</span>
+      <span style="color: var(--neon-pink)">ス</span>
+      <span style="color: var(--neon-cyan)">ポ</span>
+      <span style="color: var(--neon-yellow)">ま</span>
+      <span style="color: var(--neon-pink)">る</span> 2026
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#sports">Sports</a></li>
+        <li><a href="marche.html">店舗紹介</a></li>
+        <li><a href="escape.html" style="color: var(--neon-cyan) !important; border-bottom: 2px solid var(--neon-cyan);">謎解きゲーム</a></li>
+        <li><a href="index.html#activities">Experience</a></li>
+        <li><a href="index.html#access">Access</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span style="background-color: #FFF;"></span>
+        <span style="background-color: #FFF;"></span>
+        <span style="background-color: #FFF;"></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#sports">Sports</a></li>
+      <li><a href="marche.html">店舗紹介</a></li>
+      <li><a href="escape.html" style="color: var(--neon-pink) !important;">謎解きゲーム</a></li>
+      <li><a href="index.html#activities">Experience</a></li>
+      <li><a href="index.html#access">Access</a></li>
+    </ul>
+  </div>
+
+  <main style="padding-top: 120px;" class="pattern-mystery">
+    <div class="garland" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 20&quot; preserveAspectRatio=&quot;none&quot;><polygon points=&quot;0,0 20,0 10,20&quot; fill=&quot;%23FF2E93&quot;/><polygon points=&quot;20,0 40,0 30,20&quot; fill=&quot;%2300F0FF&quot;/><polygon points=&quot;40,0 60,0 50,20&quot; fill=&quot;%23FFDB00&quot;/><polygon points=&quot;60,0 80,0 70,20&quot; fill=&quot;%23B026FF&quot;/><polygon points=&quot;80,0 100,0 90,20&quot; fill=&quot;%23FF2E93&quot;/></svg>');"></div>
+    
+    <div class="mystery-float-container">
+      <span class="floating-q" style="top: 15%; left: 8%; color: var(--neon-pink); font-size: 3.5rem;">？</span>
+      <span class="floating-q" style="top: 45%; right: 7%; color: var(--neon-cyan); font-size: 4rem; animation-delay: 2s;">？</span>
+      <span class="floating-q" style="top: 75%; left: 10%; color: var(--neon-yellow); font-size: 3rem; animation-delay: 4s;">🔑</span>
+      <span class="floating-q" style="top: 85%; right: 12%; color: var(--neon-purple); font-size: 3.5rem; animation-delay: 1.5s;">？</span>
+    </div>
+
+    <section style="position: relative;">
+      
+      <!-- Generated pop-mystery banner image -->
+      <div class="sticker-card" style="width: 100%; border: 4px solid var(--neon-cyan); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-neon-cyan); margin-bottom: 50px; position: relative; z-index: 2;">
+        <img src="assets/escape_banner.png" alt="脱出謎解きゲーム：体育館の秘密" style="width: 100%; height: auto; display: block; object-fit: cover;">
+      </div>
+
+      <h1 class="section-title pop-text-shadow mystery-outline" style="-webkit-text-stroke: 2px #0E0A24; text-shadow: 4px 4px 0 var(--neon-pink);">
+        <span style="color: var(--neon-cyan)">脱</span><span style="color: var(--neon-pink)">出</span><span style="color: var(--neon-yellow)">謎</span><span style="color: var(--neon-cyan)">解</span><span style="color: var(--neon-pink)">き</span><span style="color: var(--neon-yellow)">ゲ</span><span style="color: var(--neon-cyan)">ー</span><span style="color: var(--neon-pink)">ム</span>
+      </h1>
+      <p class="marche-intro" style="background: rgba(22, 17, 58, 0.9); border: 4px solid var(--neon-cyan); color: #FFF; box-shadow: var(--shadow-neon-cyan); font-weight: 700;">
+        【特別企画】スポまる体育館の危機！消えたメダルの謎を解け！
+      </p>
+
+      <!-- Story Challenge -->
+      <div class="story-card fade-up">
+        <h3 class="story-title">〜 怪盗Ｓからの挑戦状 〜</h3>
+        <p class="story-text">
+          ますだスポまる運動会の開会式直前、表彰台に飾られるはずだった目玉景品<strong>「黄金のスポまるメダル」</strong>が何者かに盗まれてしまった！<br><br>
+          現場に残されていたのは、不敵に笑う<strong>【怪盗Ｓ】</strong>からの挑戦状と、体育館の各所に散らばる不思議な記号や謎の数々。<br>
+          開会式までに謎をすべて解き明かし、黄金のメダルを見つけ出して運動会を救うことができるか？<br>
+          さあ、体育館に仕掛けられた知恵比べのスタートだ！
+        </p>
+      </div>
+
+      <!-- Course Selection -->
+      <div class="course-grid">
+        
+        <!-- Course A: Family -->
+        <div class="course-card pink-border fade-up">
+          <div class="course-header-box" style="background: var(--neon-pink);">
+            🔰 ファミリーコース
+          </div>
+          <div class="course-body">
+            <span class="course-difficulty">難易度：★☆☆（お子様・親子向け）</span>
+            <p class="course-desc">
+              小学校低学年のお子様から一緒に楽しめるコースです。体育館の周辺を散策しながら、直感とひらめきで楽しく謎を解き明かしましょう！
+            </p>
+            <span style="font-size: 0.85rem; color: var(--neon-pink); font-weight: 900; border: 2px dashed var(--neon-pink); padding: 8px; border-radius: 8px; text-align: center;">
+              想定所要時間：約20分〜30分
+            </span>
+          </div>
+        </div>
+
+        <!-- Course B: Expert -->
+        <div class="course-card cyan-border fade-up">
+          <div class="course-header-box" style="background: var(--neon-cyan); color: #120E2E;">
+            🔑 エキスパートコース
+          </div>
+          <div class="course-body">
+            <span class="course-difficulty" style="color: var(--neon-cyan);">難易度：★★★（中学生〜大人・謎解きファン向け）</span>
+            <p class="course-desc">
+              ひらめき力と論理的思考力が試される本格的なコースです。怪盗Ｓが仕掛けた複雑で巧妙な罠と、隠された真実をあなたは見破ることができるか？
+            </p>
+            <span style="font-size: 0.85rem; color: var(--neon-cyan); font-weight: 900; border: 2px dashed var(--neon-cyan); padding: 8px; border-radius: 8px; text-align: center;">
+              想定所要時間：約30分〜50分
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Event Details Grid -->
+      <div class="mystery-info-grid fade-up">
+        <div class="info-item">
+          <h4>📍 開催場所</h4>
+          <p>益田市民体育館 特設脱出エリア<br>(受付：体育館入口ロビー特設ブース)</p>
+        </div>
+        <div class="info-item">
+          <h4>🕐 開催日時</h4>
+          <p>2026年10月12日 (月・祝)<br>10:00 〜 15:00<br><span style="color: var(--neon-pink); font-size: 0.85rem;">※最終受付 14:30</span></p>
+        </div>
+        <div class="info-item">
+          <h4>💰 参加方法</h4>
+          <p><strong>参加費無料！</strong><br>当日受付にて謎解きシートを受け取るだけで、誰でもその場で参加できます。</p>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="index.html#activities" class="mystery-cta-btn">体験・アクティビティへ戻る</a>
+      </div>
+
+    </section>
+  </main>
+
+  <footer style="background: rgba(22, 17, 58, 0.95); color: #FFF; padding: 40px 5%; text-align: center; border-top: 3px solid var(--neon-cyan);">
+    <p>&copy; 2026 ますだスポまる実行委員会. All rights reserved.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
