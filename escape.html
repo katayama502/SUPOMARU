@@ -76,6 +76,100 @@
       50% { transform: translateY(-20px) rotate(15deg); }
     }
 
+    /* Blinking REC Dot */
+    .rec-dot {
+      width: 10px;
+      height: 10px;
+      background-color: var(--neon-pink);
+      border-radius: 50%;
+      display: inline-block;
+      animation: blink 1s step-end infinite;
+      box-shadow: 0 0 8px var(--neon-pink);
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Scanline overlay for retro CRT effect */
+    .cctv-scanline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.25) 50%
+      ), linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.06),
+        rgba(0, 255, 0, 0.02),
+        rgba(0, 0, 255, 0.06)
+      );
+      background-size: 100% 4px, 6px 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .cctv-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    /* Laser Scanner animation */
+    .laser-scanner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--neon-pink);
+      box-shadow: 0 0 15px var(--neon-pink), 0 0 30px var(--neon-pink);
+      z-index: 10;
+      animation: scan-move 2s linear infinite;
+    }
+
+    @keyframes scan-move {
+      0% { top: 0%; opacity: 0; }
+      5% { opacity: 1; }
+      95% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    /* Shake animation for consoles */
+    @keyframes console-shake {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      10%, 30%, 50%, 70%, 90% { transform: translate(-4px, 2px) rotate(-1deg); }
+      20%, 40%, 60%, 80% { transform: translate(4px, -2px) rotate(1deg); }
+    }
+    
+    .shake-animation {
+      animation: console-shake 0.5s ease-in-out;
+    }
+
+    /* Neon Glitch Title Flickering */
+    .neon-flicker-title {
+      animation: title-flicker 3s linear infinite;
+    }
+
+    @keyframes title-flicker {
+      0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 0.99;
+        filter: drop-shadow(0 0 2px rgba(255, 46, 147, 0.5));
+      }
+      20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.4;
+        filter: none;
+      }
+    }
+
     /* Story Box */
     .story-card {
       background: var(--mystery-card-bg);
@@ -336,15 +430,36 @@
         <img src="assets/escape_banner.png" alt="脱出謎解きゲーム：体育館の秘密" style="width: 100%; height: auto; display: block; object-fit: cover;">
       </div>
 
-      <h1 class="section-title pop-text-shadow mystery-outline" style="-webkit-text-stroke: 2px #0E0A24; text-shadow: 4px 4px 0 var(--neon-pink);">
+      <h1 class="section-title pop-text-shadow mystery-outline neon-flicker-title" style="-webkit-text-stroke: 2px #0E0A24; text-shadow: 4px 4px 0 var(--neon-pink);">
         <span style="color: var(--neon-cyan)">脱</span><span style="color: var(--neon-pink)">出</span><span style="color: var(--neon-yellow)">謎</span><span style="color: var(--neon-cyan)">解</span><span style="color: var(--neon-pink)">き</span><span style="color: var(--neon-yellow)">ゲ</span><span style="color: var(--neon-cyan)">ー</span><span style="color: var(--neon-pink)">ム</span>
       </h1>
       <p class="marche-intro" style="background: rgba(22, 17, 58, 0.9); border: 4px solid var(--neon-cyan); color: #FFF; box-shadow: var(--shadow-neon-cyan); font-weight: 700;">
         【特別企画】スポまる体育館の危機！消えたメダルの謎を解け！
       </p>
 
+      <!-- Mission Briefing Video Box (masuda.mp4 autoplay) -->
+      <div class="video-console fade-up" style="margin-bottom: 50px; position: relative; z-index: 2;">
+        <div class="video-frame" style="border: 4px solid var(--neon-cyan); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-neon-cyan); background: #000; position: relative;">
+          <!-- Blinking REC Indicator -->
+          <div style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.65); padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 8px; z-index: 10; font-family: monospace; font-size: 0.85rem; color: #FFF; border: 1px solid var(--neon-pink);">
+            <span class="rec-dot"></span> SECURE FEED // MISSION BRIEF
+          </div>
+          <!-- Video Element -->
+          <video src="assets/masuda.mp4" autoplay muted loop playsinline style="width: 100%; height: auto; display: block; filter: contrast(1.1) brightness(0.95);"></video>
+          <!-- High-tech Overlay Lines -->
+          <div class="cctv-scanline"></div>
+          <div class="cctv-grid"></div>
+        </div>
+        <div style="text-align: center; margin-top: 15px; font-family: 'Zen Maru Gothic', sans-serif; font-size: 0.9rem; color: var(--neon-cyan); letter-spacing: 1px;">
+          SYSTEM STATUS: ONLINE // BRIEFING REEL ACTIVE
+        </div>
+      </div>
+
       <!-- Story Challenge -->
-      <div class="story-card fade-up">
+      <div class="story-card fade-up" style="position: relative; overflow: hidden;">
+        <!-- Scanner Laser Effect (Appears on scan click) -->
+        <div id="scanner-laser" class="laser-scanner" style="display: none;"></div>
+
         <h3 class="story-title">〜 怪盗Ｓからの挑戦状 〜</h3>
         <p class="story-text">
           ますだスポまる運動会の開会式直前、表彰台に飾られるはずだった目玉景品<strong>「黄金のスポまるメダル」</strong>が何者かに盗まれてしまった！<br><br>
@@ -352,13 +467,20 @@
           開会式までに謎をすべて解き明かし、黄金のメダルを見つけ出して運動会を救うことができるか？<br>
           さあ、体育館に仕掛けられた知恵比べのスタートだ！
         </p>
+        
+        <!-- Animated Scanner Button -->
+        <div style="text-align: center; margin-top: 25px;">
+          <button onclick="scanChallenge()" class="sticker-card tilt-card" style="padding: 12px 24px; background: var(--neon-pink); color: #FFF; font-weight: 900; font-family: 'Zen Maru Gothic', sans-serif; border-radius: 12px; border: 3px solid #333; box-shadow: 4px 4px 0px #333; cursor: pointer; font-size: 0.95rem; outline: none;">
+            🔍 挑戦状をスキャンして隠しデータを解析
+          </button>
+        </div>
       </div>
 
       <!-- Course Selection -->
       <div class="course-grid">
         
         <!-- Course A: Family -->
-        <div class="course-card pink-border fade-up">
+        <div class="course-card pink-border fade-up tilt-card">
           <div class="course-header-box" style="background: var(--neon-pink);">
             🔰 ファミリーコース
           </div>
@@ -374,7 +496,7 @@
         </div>
 
         <!-- Course B: Expert -->
-        <div class="course-card cyan-border fade-up">
+        <div class="course-card cyan-border fade-up tilt-card">
           <div class="course-header-box" style="background: var(--neon-cyan); color: #120E2E;">
             🔑 エキスパートコース
           </div>
@@ -389,6 +511,31 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- Interactive Decryption Console -->
+      <div class="story-card fade-up decryption-console" style="margin-top: 60px; border-color: var(--neon-yellow); box-shadow: 6px 6px 0 var(--neon-yellow);">
+        <h3 class="story-title" style="color: var(--neon-yellow);">🖥️ 暗号解読コンソール</h3>
+        <p style="text-align: center; font-size: 0.95rem; margin-bottom: 20px; color: #D3CEFD; line-height: 1.6;">
+          怪盗Ｓから届いた暗号だ。メダルが隠された場所のパスワードを入力せよ！
+          <br><br>
+          <strong style="color: var(--neon-pink);">ヒント：</strong>
+          体育館のどこかに隠された『ひらがな』を並び替えろ。<br>
+          バラバラの文字は 【 <span style="color: #FFF; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px;">す</span> ・ <span style="color: #FFF; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px;">ま</span> ・ <span style="color: #FFF; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px;">る</span> ・ <span style="color: #FFF; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px;">ぽ</span> 】だ！
+        </p>
+        
+        <div style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+          <input type="text" id="passcode-input" placeholder="ひらがな4文字で入力..." style="width: 100%; padding: 12px 20px; border-radius: 12px; border: 3px solid #333; background: #0E0A24; color: #FFF; font-family: 'Zen Maru Gothic', sans-serif; font-size: 1.1rem; text-align: center; font-weight: 700; outline: none; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);">
+          
+          <button onclick="decryptPassword()" class="sticker-card tilt-card" style="width: 100%; padding: 12px; background: var(--neon-yellow); color: var(--mystery-bg); font-weight: 900; font-family: 'Zen Maru Gothic', sans-serif; border-radius: 12px; font-size: 1.05rem; cursor: pointer; border: 3px solid #333; box-shadow: 4px 4px 0px #333; transition: 0.1s; text-align: center;">
+            暗号を解読する ➔
+          </button>
+        </div>
+        
+        <!-- Decryption Result -->
+        <div id="decrypt-result" style="display: none; margin-top: 25px; padding: 20px; border-radius: 12px; border: 2px solid var(--neon-cyan); text-align: center; font-family: 'Zen Maru Gothic', sans-serif;">
+          <p id="decrypt-result-text" style="font-weight: 900; font-size: 1.1rem; line-height: 1.6;"></p>
+        </div>
       </div>
 
       <!-- Event Details Grid -->
@@ -419,5 +566,120 @@
   </footer>
 
   <script src="main.js"></script>
+  
+  <script>
+    // Web Audio Synthesizer for Retro Sci-Fi Game Sound Effects
+    function playSynthSound(type) {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        
+        if (type === 'scan') {
+          // Downward sweep laser effect
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(850, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 1.2);
+          
+          gain.gain.setValueAtTime(0.06, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+          
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          
+          osc.start();
+          osc.stop(ctx.currentTime + 1.2);
+        } else if (type === 'success') {
+          // Happy upbeat arpeggio (C5 -> E5 -> G5 -> C6)
+          const playNote = (freq, delay, dur) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+            gain.gain.setValueAtTime(0.08, ctx.currentTime + delay);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + dur);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(ctx.currentTime + delay);
+            osc.stop(ctx.currentTime + delay + dur);
+          };
+          playNote(523.25, 0, 0.15); // C5
+          playNote(659.25, 0.15, 0.15); // E5
+          playNote(783.99, 0.3, 0.15); // G5
+          playNote(1046.50, 0.45, 0.45); // C6
+        } else if (type === 'fail') {
+          // Low buzzing fail alarm
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(140, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(80, ctx.currentTime + 0.35);
+          
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+          
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          
+          osc.start();
+          osc.stop(ctx.currentTime + 0.35);
+        }
+      } catch(e) {
+        console.log("Audio sweep failed or blocked by autoplay policy.");
+      }
+    }
+
+    // Scanning Clue action
+    function scanChallenge() {
+      playSynthSound('scan');
+      
+      const laser = document.getElementById('scanner-laser');
+      const card = document.querySelector('.story-card');
+      
+      laser.style.display = 'block';
+      card.classList.add('shake-animation');
+      
+      setTimeout(() => {
+        laser.style.display = 'none';
+        card.classList.remove('shake-animation');
+        alert("🔍 【スキャン完了】\n怪盗Ｓの挑戦状に隠されていた「暗号のヒントデータ」のロードに成功！\nひらがな4文字を並び替えて、下の暗号コンソールに入力してください！");
+      }, 2000);
+    }
+
+    // Passcode Decrypt action
+    function decryptPassword() {
+      const input = document.getElementById('passcode-input').value.trim();
+      const resultBox = document.getElementById('decrypt-result');
+      const resultText = document.getElementById('decrypt-result-text');
+      const consoleBox = document.querySelector('.decryption-console');
+
+      // Reset styles and remove animations
+      consoleBox.classList.remove('shake-animation');
+      
+      // Check answer (Japanese "すぽまる" or "スポまる")
+      if (input === 'すぽまる' || input === 'スポまる' || input === 'す・ま・る・ぽ') {
+        playSynthSound('success');
+        
+        resultBox.style.display = 'block';
+        resultBox.style.borderColor = 'var(--neon-cyan)';
+        resultBox.style.background = 'rgba(0, 240, 255, 0.1)';
+        resultBox.style.boxShadow = '0 0 15px rgba(0, 240, 255, 0.2)';
+        resultText.innerHTML = '🎉 【暗号解読に成功！】 🎉<br><strong style="color: var(--neon-yellow); font-size: 1.2rem;">「黄金のメダルは体育館中央の表彰台の裏にある！当日はここを探せ！」</strong><br><span style="font-size: 0.85rem; color: #FFF; opacity: 0.8;">※極秘データのため、他のみんなには内緒にしておこう！</span>';
+        resultText.style.color = 'var(--neon-cyan)';
+      } else {
+        playSynthSound('fail');
+        
+        consoleBox.classList.add('shake-animation');
+        resultBox.style.display = 'block';
+        resultBox.style.borderColor = 'var(--neon-pink)';
+        resultBox.style.background = 'rgba(255, 46, 147, 0.1)';
+        resultBox.style.boxShadow = '0 0 15px rgba(255, 46, 147, 0.2)';
+        resultText.innerHTML = '❌ 【解読エラー：パスコードが違います】<br>バラバラのひらがな４文字を正しい順番に並び替えてみよう！';
+        resultText.style.color = 'var(--neon-pink)';
+      }
+    }
+  </script>
 </body>
 </html>
