@@ -425,9 +425,9 @@
 
     <section style="position: relative;">
       
-      <!-- Generated pop-mystery banner image -->
+      <!-- Hero Banner featuring assets/H1.png -->
       <div class="sticker-card" style="width: 100%; border: 4px solid var(--neon-cyan); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-neon-cyan); margin-bottom: 50px; position: relative; z-index: 2;">
-        <img src="assets/escape_banner.png" alt="脱出謎解きゲーム：体育館の秘密" style="width: 100%; height: auto; display: block; object-fit: cover;">
+        <img src="assets/H1.png" alt="脱出謎解きゲーム：体育館の秘密" style="width: 100%; height: auto; display: block; object-fit: cover;">
       </div>
 
       <h1 class="section-title pop-text-shadow mystery-outline neon-flicker-title" style="-webkit-text-stroke: 2px #0E0A24; text-shadow: 4px 4px 0 var(--neon-pink);">
@@ -437,21 +437,21 @@
         【特別企画】スポまる体育館の危機！消えたメダルの謎を解け！
       </p>
 
-      <!-- Mission Briefing Video Box (masuda.mp4 autoplay) -->
+      <!-- Mission Briefing Monitor Box (featuring assets/M1.png) -->
       <div class="video-console fade-up" style="margin-bottom: 50px; position: relative; z-index: 2;">
         <div class="video-frame" style="border: 4px solid var(--neon-cyan); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-neon-cyan); background: #000; position: relative;">
           <!-- Blinking REC Indicator -->
           <div style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.65); padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 8px; z-index: 10; font-family: monospace; font-size: 0.85rem; color: #FFF; border: 1px solid var(--neon-pink);">
-            <span class="rec-dot"></span> SECURE FEED // MISSION BRIEF
+            <span class="rec-dot"></span> SECURE FEED // MISSION DECRYPTED
           </div>
-          <!-- Video Element -->
-          <video src="assets/masuda.mp4" autoplay muted loop playsinline style="width: 100%; height: auto; display: block; filter: contrast(1.1) brightness(0.95);"></video>
+          <!-- M1.png Image instead of video -->
+          <img src="assets/M1.png" alt="Mission Briefing Image" style="width: 100%; height: auto; display: block; filter: contrast(1.05) brightness(0.95);">
           <!-- High-tech Overlay Lines -->
           <div class="cctv-scanline"></div>
           <div class="cctv-grid"></div>
         </div>
         <div style="text-align: center; margin-top: 15px; font-family: 'Zen Maru Gothic', sans-serif; font-size: 0.9rem; color: var(--neon-cyan); letter-spacing: 1px;">
-          SYSTEM STATUS: ONLINE // BRIEFING REEL ACTIVE
+          SYSTEM STATUS: ONLINE // DATA FILE: M1.PNG LOADED
         </div>
       </div>
 
@@ -460,10 +460,10 @@
         <!-- Scanner Laser Effect (Appears on scan click) -->
         <div id="scanner-laser" class="laser-scanner" style="display: none;"></div>
 
-        <h3 class="story-title">〜 怪盗Ｓからの挑戦状 〜</h3>
+        <h3 class="story-title">〜 怪盗Ｍからの挑戦状 〜</h3>
         <p class="story-text">
           ますだスポまる運動会の開会式直前、表彰台に飾られるはずだった目玉景品<strong>「黄金のスポまるメダル」</strong>が何者かに盗まれてしまった！<br><br>
-          現場に残されていたのは、不敵に笑う<strong>【怪盗Ｓ】</strong>からの挑戦状と、体育館の各所に散らばる不思議な記号や謎の数々。<br>
+          現場に残されていたのは、不敵に笑う<strong>【怪盗Ｍ】</strong>からの挑戦状と、体育館の各所に散らばる不思議な記号や謎の数々。<br>
           開会式までに謎をすべて解き明かし、黄金のメダルを見つけ出して運動会を救うことができるか？<br>
           さあ、体育館に仕掛けられた知恵比べのスタートだ！
         </p>
@@ -471,7 +471,7 @@
         <!-- Animated Scanner Button -->
         <div style="text-align: center; margin-top: 25px;">
           <button onclick="scanChallenge()" class="sticker-card tilt-card" style="padding: 12px 24px; background: var(--neon-pink); color: #FFF; font-weight: 900; font-family: 'Zen Maru Gothic', sans-serif; border-radius: 12px; border: 3px solid #333; box-shadow: 4px 4px 0px #333; cursor: pointer; font-size: 0.95rem; outline: none;">
-            🔍 挑戦状をスキャンして隠しデータを解析
+            🔍 怪盗Ｍの挑戦状をスキャンして隠しデータを解析
           </button>
         </div>
       </div>
@@ -503,7 +503,7 @@
           <div class="course-body">
             <span class="course-difficulty" style="color: var(--neon-cyan);">難易度：★★★（中学生〜大人・謎解きファン向け）</span>
             <p class="course-desc">
-              ひらめき力と論理的思考力が試される本格的なコースです。怪盗Ｓが仕掛けた複雑で巧妙な罠と、隠された真実をあなたは見破ることができるか？
+              ひらめき力と論理的思考力が試される本格的なコースです。怪盗Ｍが仕掛けた複雑で巧妙な罠と、隠された真実をあなたは見破ることができるか？
             </p>
             <span style="font-size: 0.85rem; color: var(--neon-cyan); font-weight: 900; border: 2px dashed var(--neon-cyan); padding: 8px; border-radius: 8px; text-align: center;">
               想定所要時間：約30分〜50分
@@ -517,7 +517,7 @@
       <div class="story-card fade-up decryption-console" style="margin-top: 60px; border-color: var(--neon-yellow); box-shadow: 6px 6px 0 var(--neon-yellow);">
         <h3 class="story-title" style="color: var(--neon-yellow);">🖥️ 暗号解読コンソール</h3>
         <p style="text-align: center; font-size: 0.95rem; margin-bottom: 20px; color: #D3CEFD; line-height: 1.6;">
-          怪盗Ｓから届いた暗号だ。メダルが隠された場所のパスワードを入力せよ！
+          怪盗Ｍから届いた暗号だ。メダルが隠された場所のパスワードを入力せよ！
           <br><br>
           <strong style="color: var(--neon-pink);">ヒント：</strong>
           体育館のどこかに隠された『ひらがな』を並び替えろ。<br>
@@ -644,7 +644,7 @@
       setTimeout(() => {
         laser.style.display = 'none';
         card.classList.remove('shake-animation');
-        alert("🔍 【スキャン完了】\n怪盗Ｓの挑戦状に隠されていた「暗号のヒントデータ」のロードに成功！\nひらがな4文字を並び替えて、下の暗号コンソールに入力してください！");
+        alert("🔍 【スキャン完了】\n怪盗Ｍの挑戦状に隠されていた「暗号のヒントデータ」のロードに成功！\nひらがな4文字を並び替えて、下の暗号コンソールに入力してください！");
       }, 2000);
     }
 
