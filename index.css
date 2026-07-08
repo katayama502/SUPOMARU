@@ -267,9 +267,13 @@ nav a.cta {
 }
 
 .sub-title {
-  font-size: 1.5rem;
-  color: var(--accent-orange);
+  font-size: clamp(1.3rem, 5.5vw, 1.9rem);
+  color: #FFF;
   font-weight: 900;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  -webkit-text-stroke: 1px #333;
+  text-shadow: 2px 2px 0 #333, 3px 3px 0 rgba(0,0,0,0.2);
+  letter-spacing: 0.02em;
 }
 
 .event-details-hero {
@@ -604,6 +608,68 @@ section {
   box-shadow: var(--shadow-pop);
 }
 
+/* --- Vendor Photo Cards --- */
+.sport-img-container.has-photo {
+  padding: 0;
+  height: 230px;
+  background: linear-gradient(135deg, #fdf1e4 0%, #ffe6ef 100%);
+  position: relative;
+}
+
+.sport-img-container.has-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,219,0,0.35) 0 8px, transparent 9px),
+    radial-gradient(circle at 80% 75%, rgba(0,177,255,0.3) 0 6px, transparent 7px);
+  animation: float 5s ease-in-out infinite;
+}
+
+.sport-img-container.has-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 -55px 45px -35px rgba(0,0,0,0.28);
+}
+
+.sport-img-container.has-photo .sport-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+}
+
+.sport-card:hover .has-photo .sport-img {
+  transform: scale(1.08);
+}
+
+/* Instagram-flavored vendor button */
+.vendor-btn.ig {
+  background: linear-gradient(45deg, #f9ce34, #ee2a7b 45%, #6228d7);
+  color: #FFF;
+}
+
+.vendor-btn.ig:hover {
+  background: linear-gradient(45deg, #f9ce34, #ee2a7b 55%, #6228d7);
+  color: #FFF;
+}
+
+/* Vendor card polish */
+.marche-section .sport-card { position: relative; }
+
+.marche-section .sport-content h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
 /* Responsive */
 @media (max-width: 992px) {
   nav .nav-links { display: none; }
@@ -653,9 +719,10 @@ section {
     font-size: 0.85rem !important;
   }
   .hero-illustration { margin-bottom: -80px; opacity: 0.6; }
-  .bubble-item { width: 140px; height: 140px; }
-  .bubble-icon { font-size: 2rem; }
-  .bubble-title { font-size: 0.9rem; }
+  .bubble-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 440px; margin: 0 auto; }
+  .bubble-item { width: auto; height: auto; }
+  .bubble-icon { height: 128px; font-size: 2rem; }
+  .bubble-title { font-size: 0.95rem; padding: 12px 8px; }
   .sport-card h3 {
     font-size: 1.15rem !important;
     margin-bottom: 8px !important;
@@ -685,4 +752,247 @@ section {
     transform: translate(-1px, -1px) !important;
     box-shadow: 4px 4px 0px #333 !important;
   }
+}
+
+/* ===== Flyer-inspired vibrant theme (2026) ===== */
+.hero.pattern-festival {
+  justify-content: flex-start;
+  padding-top: 130px;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255,255,255,0.55), transparent 42%),
+    radial-gradient(circle at 88% 8%, rgba(255,255,255,0.40), transparent 40%),
+    linear-gradient(158deg, #FFE14D 0%, #FFD23F 20%, #FF7BAC 52%, #FF5BA0 66%, #4FD9E8 100%);
+}
+
+.hero-tagline {
+  position: relative;
+  z-index: 12;
+  display: inline-block;
+  max-width: 92%;
+  background: #FFF;
+  border: 3px solid #333;
+  border-radius: 40px;
+  padding: 9px 26px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.15);
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: 900;
+  line-height: 1.35;
+  margin-bottom: 4px;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+.hero-tagline .tag-main {
+  display: inline-block;
+  color: var(--marche-pink);
+  font-size: clamp(1.05rem, 4.4vw, 1.6rem);
+}
+.hero-tagline .tag-sub {
+  display: block;
+  color: var(--accent-blue);
+  font-size: clamp(0.8rem, 3.2vw, 1.05rem);
+  margin-top: 2px;
+}
+
+.attendance-note {
+  position: relative;
+  z-index: 10;
+  margin-top: 28px;
+  display: inline-block;
+  background: #FFF;
+  border: 4px solid var(--sports-yellow);
+  border-radius: 50px;
+  padding: 10px 28px;
+  font-weight: 900;
+  color: var(--accent-orange);
+  box-shadow: var(--shadow-pop);
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+}
+
+/* Nazotoki highlight banner */
+#nazotoki-highlight { padding-top: 20px; padding-bottom: 20px; }
+.nazotoki-banner {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 34px;
+  text-decoration: none;
+  color: var(--text-white);
+  background: linear-gradient(120deg, #7A3FF2 0%, #B24BF2 40%, #FF4FA3 100%);
+  border: var(--border-thick);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-pop);
+  padding: 30px 34px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+/* Nazotoki key-visual panel */
+.nazotoki-media {
+  position: relative;
+  flex: 1.2;
+  min-width: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 3px solid #333;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.28);
+  align-self: stretch;
+}
+.nazotoki-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 230px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.nazotoki-banner:hover .nazotoki-media img { transform: scale(1.06); }
+.nazotoki-media .new-burst {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+}
+.nazotoki-text {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.nazotoki-banner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 90% 20%, rgba(255,255,255,0.18) 0 20px, transparent 21px),
+    radial-gradient(circle at 72% 82%, rgba(255,255,255,0.14) 0 14px, transparent 15px);
+  pointer-events: none;
+}
+.nazotoki-banner:hover { transform: translate(-4px,-4px); box-shadow: 12px 12px 0 rgba(0,0,0,0.2); }
+.nazotoki-text { position: relative; z-index: 1; }
+.nazotoki-label {
+  display: inline-block; background: var(--sports-yellow); color: var(--text-main);
+  font-weight: 900; font-family: 'Zen Maru Gothic', sans-serif;
+  padding: 4px 16px; border-radius: 20px; border: 3px solid #333; transform: rotate(-2deg);
+  margin-bottom: 12px; font-size: 0.95rem;
+}
+.nazotoki-title { font-size: clamp(1.6rem, 4vw, 2.8rem); margin: 6px 0 10px; white-space: nowrap; }
+.nazotoki-banner p { font-size: 1.05rem; margin-bottom: 16px; font-weight: 700; }
+.banner-cta {
+  display: inline-block; background: var(--sports-yellow); color: var(--text-main);
+  font-weight: 900; padding: 10px 26px; border-radius: 50px; border: 3px solid #333;
+  box-shadow: 4px 4px 0 #333; transition: 0.2s;
+}
+.nazotoki-banner:hover .banner-cta { background: var(--accent-orange); color: #FFF; }
+
+.new-burst {
+  flex-shrink: 0;
+  width: 86px; height: 86px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #FF3D3D; color: #FFF;
+  font-family: 'Zen Maru Gothic', sans-serif; font-weight: 900; font-size: 1.3rem;
+  border: 4px solid #333; box-shadow: 4px 4px 0 #333;
+  transform: rotate(-10deg);
+}
+
+@media (max-width: 768px) {
+  .nazotoki-banner { flex-direction: column; text-align: center; gap: 18px; padding: 22px 18px; }
+  .nazotoki-media { width: 100%; flex: none; }
+  .nazotoki-media img { min-height: 180px; }
+  .nazotoki-text { align-items: center; }
+  .new-burst { width: 66px; height: 66px; font-size: 1rem; }
+  .hero-tagline { padding: 8px 18px; max-width: 96%; }
+}
+
+/* ===================================================================
+   Motion & liveliness (2026) — ambient + scroll-reveal
+   =================================================================== */
+
+/* NEW badge attention pulse */
+@keyframes burst-pulse {
+  0%, 100% { transform: rotate(-10deg) scale(1); }
+  50%      { transform: rotate(-10deg) scale(1.12); }
+}
+.new-burst { animation: burst-pulse 1.5s ease-in-out infinite; }
+
+/* Hero title gentle wave */
+@keyframes letter-wave {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+.hero .main-title span {
+  display: inline-block;
+  animation: letter-wave 2.8s ease-in-out infinite;
+}
+.hero .main-title span:nth-child(1)  { animation-delay: 0s; }
+.hero .main-title span:nth-child(2)  { animation-delay: .08s; }
+.hero .main-title span:nth-child(3)  { animation-delay: .16s; }
+.hero .main-title span:nth-child(4)  { animation-delay: .24s; }
+.hero .main-title span:nth-child(5)  { animation-delay: .32s; }
+.hero .main-title span:nth-child(6)  { animation-delay: .40s; }
+.hero .main-title span:nth-child(7)  { animation-delay: .48s; }
+.hero .main-title span:nth-child(8)  { animation-delay: .56s; }
+.hero .main-title span:nth-child(9)  { animation-delay: .64s; }
+.hero .main-title span:nth-child(10) { animation-delay: .72s; }
+.hero .main-title span:nth-child(11) { animation-delay: .80s; }
+.hero .main-title span:nth-child(12) { animation-delay: .88s; }
+.hero .main-title span:nth-child(13) { animation-delay: .96s; }
+.hero .main-title span:nth-child(14) { animation-delay: 1.04s; }
+.hero .main-title span:nth-child(15) { animation-delay: 1.12s; }
+.hero .main-title span:nth-child(16) { animation-delay: 1.20s; }
+
+/* Garland sway */
+@keyframes garland-sway {
+  0%, 100% { background-position-x: 0; }
+  50%      { background-position-x: 34px; }
+}
+.garland { animation: garland-sway 7s ease-in-out infinite; }
+
+/* CTA soft pulse (invites taps) */
+@keyframes cta-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.035); }
+}
+.apply-btn, .banner-cta { animation: cta-pulse 2s ease-in-out infinite; }
+.apply-btn:hover, .nazotoki-banner:hover .banner-cta { animation-play-state: paused; }
+
+/* Section titles pop when their section reveals */
+@keyframes title-pop {
+  0%   { opacity: 0; transform: scale(.8) translateY(20px); }
+  60%  { opacity: 1; transform: scale(1.05) translateY(0); }
+  100% { transform: scale(1) translateY(0); }
+}
+.fade-up.visible .section-title { animation: title-pop .6s cubic-bezier(.22,1.4,.4,1) both; }
+
+/* Staggered card reveal on scroll */
+@keyframes card-pop-in {
+  from { opacity: 0; transform: translateY(30px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+#sports.visible .sport-card,
+#marche.visible .marche-card {
+  animation: card-pop-in .6s cubic-bezier(.22,1,.36,1) backwards;
+}
+#sports.visible .sport-card:nth-child(2)  { animation-delay: .14s; }
+#marche.visible .marche-card:nth-child(1) { animation-delay: 0s; }
+#marche.visible .marche-card:nth-child(2) { animation-delay: .1s; }
+#marche.visible .marche-card:nth-child(3) { animation-delay: .2s; }
+#marche.visible .marche-card:nth-child(4) { animation-delay: .3s; }
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .new-burst,
+  .hero .main-title span,
+  .garland,
+  .apply-btn,
+  .banner-cta,
+  .hero-illustration,
+  .bubble-item {
+    animation: none !important;
+  }
+  .fade-up.visible .section-title,
+  #sports.visible .sport-card,
+  #marche.visible .marche-card {
+    animation: none !important;
+  }
+  html { scroll-behavior: auto; }
 }
