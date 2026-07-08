@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00B1FF"/>
+      <stop offset="1" stop-color="#FF6699"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#g)" stroke="#333" stroke-width="3"/>
+  <text x="32" y="45" font-family="'Zen Maru Gothic','Hiragino Maru Gothic ProN','Yu Gothic',sans-serif" font-size="38" font-weight="900" fill="#FFF" text-anchor="middle" stroke="#333" stroke-width="1.5" paint-order="stroke">ス</text>
+</svg>
