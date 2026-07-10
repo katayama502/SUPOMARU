@@ -279,8 +279,9 @@ nav a.cta {
 .event-details-hero {
   margin-top: 40px;
   display: flex;
-  gap: 30px;
+  gap: 18px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .info-badge {
